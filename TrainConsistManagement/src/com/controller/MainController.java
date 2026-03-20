@@ -19,7 +19,7 @@ public class MainController {
         System.out.println("\n1. Add bogies");
         System.out.println("2. View Bogies");
         System.out.println("3. Sort bogie by Bogie ID");
-        System.out.println("5. Logout");
+        System.out.println("4. Logout");
         System.out.print("Enter your choice: ");
 
         int choice = sc.nextInt();
@@ -39,7 +39,7 @@ public class MainController {
     	System.out.println(type+" -> "+capacity+" added");
     }
     
-    // linear array based searching
+    // binary search based searching
     public void searchBogieById(Train train) throws IllegalStateException {
     	System.out.print("Enter the Bogie Id to search : ");
     	String bogieId = sc.nextLine();

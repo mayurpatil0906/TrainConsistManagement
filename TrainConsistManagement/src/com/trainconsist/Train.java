@@ -36,7 +36,7 @@ public class Train {
 		bogies.add(new Bogie(type, capacity));  
 	}
 
-	// array based searching
+	// binary searching
 	public Bogie searchById(String bogieId) throws IllegalStateException{ 
 		boolean isFound = false;
 		for (Train.Bogie bogie : getBogie()) {
