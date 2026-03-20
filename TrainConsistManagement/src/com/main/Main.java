@@ -1,5 +1,4 @@
 
-
 package com.main;
 
 import com.controller.*;
@@ -16,19 +15,15 @@ public class Main {
 
 		boolean running = true;
 		
-		while(running) {
-			int choice = mainController.showMenuAndGetChoice();
+		while(running) { 
+			int choice = mainController.showMenuAndGetChoice(); // menu
 			switch(choice) {
 			
 			case 1:
-				mainController.addPassengerBogie(train);
+				mainController.assignCargotoBogie(); // adding bogie and checking cargo safety
 				break;
 			
 			case 2:
-				mainController.displayPassengerBogies(train);
-				break;
-			
-			case 3:
 				running = false;
 				mainController.displayPassengerBogies(train);
 				break;

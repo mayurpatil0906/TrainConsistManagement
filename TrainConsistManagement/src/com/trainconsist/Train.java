@@ -8,44 +8,52 @@ import java.util.stream.*;
 public class Train {
 
 	// Inner class GoodsBogie
-	public static class Bogie{
-		private String type;
-		private int capacity;
+	public static class GoodsBogie{
+		private String shape;
+		private String cargo;
 		
-		public Bogie(String type, int capacity) throws InvalidCapacityException{
-			
-			if(capacity<=0) {
-				throw new InvalidCapacityException("Capacity must be greater than 0");
-			}
-			this.type = type;
-			this.capacity = capacity;
+		public GoodsBogie(String shape){
+			this.shape = shape;
 		}
 		
-		public String getType() {
-			return type;
+		public String getShape() {
+			return shape;
 		} 
 		
-		public int getCapacity() {
-			return capacity;
+		public String getCargo() {
+			return cargo; 
 		}
 		
-		public String toString() {
-			return type+" -> "+capacity;
+		public void assignCargo(String cargo) {
+			try {
+				// rectangle bogie != petroleum
+				if(this.shape.equalsIgnoreCase("Rectangular") && cargo.equalsIgnoreCase("Petroleum")) {
+					throw new CargoSafetyException("Unsafe Cargo assignment");
+				}
+				this.cargo = cargo;
+				System.out.println("Cargo assigned -> "+cargo);
+				
+			}
+			catch (CargoSafetyException e){
+				System.out.println("Error : "+e.getMessage());
+			}
+			finally {
+				System.out.println("Cargo validation cpmpleted for "+this.shape+" bogie");
+			}
 		}
 	}
 	
-	private List<Bogie> bogies; // list of object of Bogies
+	private List<GoodsBogie> bogies; // list of object of Bogies
 	
 	public Train() {
 		this.bogies = new ArrayList<>();
 	}
 	
-	public void addBogie(String type, int capacity) throws InvalidCapacityException{ // add objects to the list
-		bogies.add(new Bogie(type,capacity)); 
+	public void addBogie(String shape, String cargo){ // add objects to the list
+		bogies.add(new GoodsBogie(shape));  
 	}
 	
-	public List<Bogie> getBogie(){  
+	public List<GoodsBogie> getBogie(){  
 		return bogies;
 	}
-
 }
