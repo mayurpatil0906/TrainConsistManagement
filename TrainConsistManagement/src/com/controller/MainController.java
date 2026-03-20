@@ -22,7 +22,7 @@ public class MainController {
 		
 		System.out.println("1. Add Bogies");
 		System.out.println("2. View all bogies");
-		System.out.println("3. Group bogies by type");
+		System.out.println("3. View total train capacity");
 		System.out.println("4. Logout");
 		System.out.print("\nEnter your choice : ");
 		
@@ -56,15 +56,9 @@ public class MainController {
 	}
 	
 	// method for displaying grouped bogies 
-	public void displayGrouped(Train train) {
-		System.out.println("\nAfter Grouping : ");
-		Map<String , List<Bogie>> groupedBogies=  train.groupBogiesByType();
-		for(Map.Entry<String,List<Bogie>> entry : groupedBogies.entrySet()) {
-			System.out.println("\nBogie type : "+entry.getKey());
-			for(Train.Bogie bogie : entry.getValue()) {
-				System.out.println("Capacity -> "+bogie.getCapacity());
-			}
-		}
+	public void getTotalCapacity(Train train) {
+		int sum =  train.getTotalCapacity();
+		System.out.println("\nTotal Count : "+sum);
 	}
 	
 

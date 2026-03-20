@@ -25,7 +25,7 @@ public class Main {
 				mainController.displayAll(train); // unfiltered bogies
 				break;
 			case 3:
-				mainController.displayGrouped(train); // filtered bogies
+				mainController.getTotalCapacity(train); // filtered bogies
 				break;
 			case 4:
 				// display final consist

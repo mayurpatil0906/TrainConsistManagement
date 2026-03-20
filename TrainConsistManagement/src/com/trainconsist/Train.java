@@ -45,7 +45,7 @@ public class Train {
 		return bogies;
 	}
 	
-	public Map<String,List<Bogie>> groupBogiesByType() {  
-		return bogies.stream().collect(Collectors.groupingBy(b -> b.getName()));    // grouping by names
+	public int getTotalCapacity() {   
+		return bogies.stream().map(bogie->bogie.capacity).reduce(0,Integer::sum);     // adding capacities
 	}
 }
