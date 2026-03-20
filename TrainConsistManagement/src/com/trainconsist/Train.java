@@ -6,29 +6,29 @@ import java.util.*;
 
 public class Train {
 	
-	private List<String> passengerBpgies; //list of bogies
+	private Set<String> passengerBogies; // set of bogies for avoiding duplicates
 	
 	public Train() {
-		this.passengerBpgies = new ArrayList<>(); // initializing the list
+		this.passengerBogies = new HashSet<>(); // initializing the list
 	}
 	
 	public int getBogieCount() {
-		return passengerBpgies.size();   //get number of bogies
+		return passengerBogies.size();   //get number of bogies
 	}
 	
-	public List<String> getTrainConsist(){
-		return passengerBpgies; // get list of bogies
+	public Set<String> getTrainConsist(){
+		return passengerBogies;   // get list of bogies
 	}
 	
-	public void addBogie(String bogie) { //adding bogie
-		passengerBpgies.add(bogie.trim());
+	public void addBogie(String bogie) {   //adding bogie
+		passengerBogies.add(bogie.trim());
 	}
 	
-	public void removeBogie(String bogie) { //removing bogie
-		passengerBpgies.remove(bogie.trim());
+	public void removeBogie(String bogie) {   //removing bogie
+		passengerBogies.remove(bogie.trim());
 	}
 	
-	public boolean containsBogie(String bogie) { // checking if bogie exists
-		return passengerBpgies.contains(bogie);
+	public boolean containsBogie(String bogie) {   // checking if bogie exists
+		return passengerBogies.contains(bogie); 
 	}
 }

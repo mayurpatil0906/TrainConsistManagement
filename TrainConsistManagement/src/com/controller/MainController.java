@@ -24,16 +24,16 @@ public class MainController {
 		System.out.println("2. Remove bogies");
 		System.out.println("3. View if Bogie Exists");
 		System.out.println("4. Logout");
-		System.out.print("5. Enter your choice :");
+		System.out.print("5. Enter your choice : ");
 		
 		int choice = sc.nextInt();
 		sc.nextLine(); //consumes the new line character
 		return choice; 
 	}
 	
-	// method for adding multiple bogies together
+	// method for adding multiple bogies together, duplicates will be ignored automatically
 	public void addBogies(Train train) {
-		System.out.print("Enter passenger bogies to add (Comma separated) : ");
+		System.out.print("Enter passenger bogie ID's to add (Comma separated) : ");
 		String input = sc.nextLine();
 		if(!input.trim().isEmpty()) {
 			String[] bogies = input.split(",");
@@ -47,12 +47,14 @@ public class MainController {
 	
 	// method for removing multiple bogies together
 	public void removeBogies(Train train) {
-		System.out.print("Enter passenger bogies to remove (Comma separated) : ");
+		System.out.print("Enter passenger bogie ID's to remove (Comma separated) : ");
 		String input = sc.nextLine();
 		if(!input.trim().isEmpty()) {
 			String[] bogies = input.split(",");
 			for(String bogie : bogies) {
-				train.removeBogie(bogie);
+				if(train.containsBogie(bogie)) train.removeBogie(bogie);
+				else System.out.println("Bogies "+ bogie + " Does not Exist");
+				
 			}
 		}
 		System.out.println("After removing bogies: ");
@@ -61,7 +63,7 @@ public class MainController {
 	
 	// checking if a bogie exists or not
 	public void checkBogie(Train train) { 
-		System.out.print("Enter passenger bogie to check : ");
+		System.out.print("Enter passenger bogie ID to check : ");
 		String bogie = sc.nextLine().trim();
 		boolean exist = train.containsBogie(bogie);
 		
