@@ -1,4 +1,5 @@
 
+
 package com.main;
 
 import com.controller.*;
@@ -20,12 +21,19 @@ public class Main {
 			switch(choice) {
 			
 			case 1:
-				mainController.assignCargotoBogie(); // adding bogie and checking cargo safety
+				mainController.addBogies(train); // adding bogie 
 				break;
 			
 			case 2:
+				mainController.displayBogies(train); // printing bogies
+				break;
+				
+			case 3:
+				mainController.performBubbleSort(train); // performing bubble sort
+				break;
+			case 4:
 				running = false;
-				mainController.displayPassengerBogies(train);
+				mainController.performBubbleSort(train);
 				break;
 				
 			default:

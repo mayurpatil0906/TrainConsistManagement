@@ -8,52 +8,54 @@ import java.util.stream.*;
 public class Train {
 
 	// Inner class GoodsBogie
-	public static class GoodsBogie{
-		private String shape;
-		private String cargo;
+	public static class Bogie{
+		private String type;
+		private int capacity;
 		
-		public GoodsBogie(String shape){
-			this.shape = shape;
+		public Bogie(String type, int capacity){
+			this.type = type;
+			this.capacity = capacity;
 		}
 		
-		public String getShape() {
-			return shape;
+		public String getType() {
+			return type;
 		} 
 		
-		public String getCargo() {
-			return cargo; 
-		}
-		
-		public void assignCargo(String cargo) {
-			try {
-				// rectangle bogie != petroleum
-				if(this.shape.equalsIgnoreCase("Rectangular") && cargo.equalsIgnoreCase("Petroleum")) {
-					throw new CargoSafetyException("Unsafe Cargo assignment");
-				}
-				this.cargo = cargo;
-				System.out.println("Cargo assigned -> "+cargo);
-				
-			}
-			catch (CargoSafetyException e){
-				System.out.println("Error : "+e.getMessage());
-			}
-			finally {
-				System.out.println("Cargo validation cpmpleted for "+this.shape+" bogie");
-			}
+		public int getCapacity() {
+			return capacity; 
 		}
 	}
 	
-	private List<GoodsBogie> bogies; // list of object of Bogies
+	private List<Bogie> bogies; // list of object of Bogies
 	
 	public Train() {
 		this.bogies = new ArrayList<>();
 	}
 	
-	public void addBogie(String shape, String cargo){ // add objects to the list
-		bogies.add(new GoodsBogie(shape));  
+	public void addBogie(String type, int capacity){ // add objects to the list
+		bogies.add(new Bogie(type, capacity));  
 	}
 	
-	public List<GoodsBogie> getBogie(){  
+	public List<Bogie> getBogie(){  
 		return bogies;
+	}
+	
+	public void bubbleSortByCapacity() { // bubble sort algorithm
+		int size = bogies.size();
+		
+		// outer loop for number of passes
+		for(int i=0;i<size-1;i++) {
+			
+			//inner loop for comparing adjacent elements
+			for(int j=0;j<size-i-1;j++) {
+				if(bogies.get(j).getCapacity() > bogies.get(j+1).getCapacity()) {
+					// swap the elements
+					Bogie temp = bogies.get(j);
+					bogies.set(j, bogies.get(j+1));
+					bogies.set(j+1, temp);
+				}
+			}
+			
+		}
 	}
 }

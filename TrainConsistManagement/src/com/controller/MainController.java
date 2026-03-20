@@ -3,7 +3,6 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import com.trainconsist.*;
-import com.trainconsist.Train.GoodsBogie; 
 
 public class MainController {
 	
@@ -16,9 +15,11 @@ public class MainController {
     }
     
     // taking user input 
-    public int showMenuAndGetChoice() {
-        System.out.println("1. Assign cargo to goods bogie");
-        System.out.println("2. Logout");
+    public int showMenuAndGetChoice() { 
+        System.out.println("1. Assign bogies");
+        System.out.println("2. View Bogies");
+        System.out.println("3. View Sorted Bogies (wrt capacity)");
+        System.out.println("4. Logout");
         System.out.print("Enter your choice: ");
 
         int choice = sc.nextInt();
@@ -26,24 +27,33 @@ public class MainController {
         return choice;
     }
     
-    // adding passenger bogie
-    public void assignCargotoBogie() {
-        System.out.print("Enter bogie shape (Rectangular,Box,Cylindrical) : ");
-        String shape = sc.nextLine();
-        Train.GoodsBogie bogie = new Train.GoodsBogie(shape);
-        
-        System.out.print("Enter cargo to assign (Petroleum, Coal) : ");
-        String cargo = sc.nextLine();
-        bogie.assignCargo(cargo);
-
-        
+    //adding bogies
+    public void addBogies(Train train) {
+    	System.out.print("Enter the bogie ID : ");
+    	String type = sc.nextLine();
+    	
+    	System.out.print("Enter the capacity : ");
+    	int capacity = sc.nextInt();
+    	
+    	train.addBogie(type, capacity);
+    	System.out.println(type+" -> "+capacity+" added");
+    	
     }
+    // sortig bogies on the basis of their capacity
+     public void performBubbleSort(Train train) { 
+    	 if(train.getBogie().isEmpty()) {
+    		 System.out.println("No bogie to sort");
+    	 }
+    	 train.bubbleSortByCapacity();
+    	 System.out.println("\nAfter sorting\n");
+    	 displayBogies(train);
+     }
 
     // displaying all bogies
-    public void displayPassengerBogies(Train train) {
-        System.out.println("\nPassenger Bogies in Train :"); 
-        for (Train.GoodsBogie bogie : train.getBogie()) {
-            System.out.println(bogie);
+    public void displayBogies(Train train) {
+        System.out.println("\nBogies in Train Consist :"); 
+        for (Train.Bogie bogie : train.getBogie()) {
+            System.out.println(bogie.getType()+" -> "+bogie.getCapacity());
         }
     }
 
