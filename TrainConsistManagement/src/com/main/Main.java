@@ -1,5 +1,4 @@
 
-
 package com.main;
 
 import com.controller.*;
@@ -23,27 +22,15 @@ public class Main {
 				mainController.addBogies(train); // adding bogies
 				break;
 			case 2:
-				mainController.addBogieAtFirst(train); // adding bogies at first
-				break;
-			case 3:
-				mainController.addBogieAtLast(train); //adding bogies at last
-				break;
-			case 4:
-				mainController.addBogieAtIndex(train); // adding bogies at any position
-				break;
-			case 5:
 				mainController.removeBogies(train); // remove bogies
 				break;
-			case 6:
-				mainController.removeBogieFromFirst(train); // remove from first
+			case 3:
+				mainController.displayConsist(train); // display mapping
 				break;
-			case 7:
-				mainController.removeBogieFromLast(train); // remove from last
-				break;
-			case 8:
+			case 4:
 				mainController.checkBogie(train); // check if bogie exist
 				break;
-			case 9:
+			case 5:
 				mainController.displayConsist(train); // display final consist
 				running = false;
 				break;
