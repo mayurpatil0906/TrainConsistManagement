@@ -40,7 +40,7 @@ public class MainController {
     }
     
     // linear array based searching
-    public void searchBogieById(Train train) throws BogieNotFoundException {
+    public void searchBogieById(Train train) throws IllegalStateException {
     	System.out.print("Enter the Bogie Id to search : ");
     	String bogieId = sc.nextLine();
     	try {
@@ -48,7 +48,7 @@ public class MainController {
         	System.out.println("Found bogie "+foundBogie.getType()+" with capacity "+foundBogie.getCapacity());
         	
     	}
-    	catch (BogieNotFoundException e) {
+    	catch (IllegalStateException e) {
         	System.out.println("\nError : "+e.getMessage());
     	}
     }
