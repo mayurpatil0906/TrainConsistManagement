@@ -20,11 +20,10 @@ public class MainController {
 	//Initializing the application with by default values
 	public int showMenuGetChoice() {
 		
-		System.out.println("1. Map Bogies");
-		System.out.println("2. Remove Bogie");
-		System.out.println("3. View bogie and their capacities");
-		System.out.println("4. Check if bogie exists");
-		System.out.println("5. Logout");
+		System.out.println("1. Add Bogies");
+		System.out.println("2. View bogies before sorting");
+		System.out.println("3. View bogies after sorting on the basis of capacity");
+		System.out.println("4. Logout");
 		System.out.print("\nEnter your choice : ");
 		
 		int choice = sc.nextInt();
@@ -34,13 +33,13 @@ public class MainController {
 	
 	// method for adding bogies and their capacity
 	public void addBogies(Train train) {
-		System.out.print("Enter passenger bogie ID's and Capacity to add : ");
+		System.out.print("Enter passenger bogie's ID : ");
 		String bogie = sc.nextLine();
-		String capacity = sc.nextLine();
-		if(!bogie.trim().isEmpty() && !capacity.trim().isEmpty()) {
-				train.mapBogieCapacity(bogie,capacity);
-				System.out.println("After adding bogies: ");
-				System.out.println("Passenger Bogies -> "+train.getTrainConsist());
+		System.out.print("Enter passenger bogie's capacity : ");
+		int capacity = sc.nextInt();
+		if(!bogie.trim().isEmpty() && capacity>0) {
+				train.addBogie(bogie,capacity);
+				System.out.println("Added "+bogie+" with capacity "+ capacity);
 		}
 		else {
 			System.out.println("Invalid input");
@@ -48,38 +47,22 @@ public class MainController {
 		
 	}
 	
-	
-	// method for removing multiple bogies together
-	public void removeBogies(Train train) {
-		System.out.print("Enter passenger bogie ID's to remove : ");
-		String input = sc.nextLine();
-		if(!input.trim().isEmpty()) {
-			String[] bogies = input.split(",");
-			for(String bogie : bogies) {
-				if(train.containsBogie(bogie)) train.removeBogieCapacity(bogie);
-				else System.out.println("Bogies "+ bogie + " Does not Exist");
-				
-			}
+	// method for displaying unsorted List
+	public void displayUnsorted(Train train) {
+		System.out.println("Before Sorting : ");
+		for(Train.Bogie bogie : train.getBogies()) {
+			System.out.println(bogie);
 		}
-		System.out.println("After removing bogies: ");
-		System.out.println("Passenger Bogies -> "+train.getTrainConsist());
 	}
 	
-	
-	// checking if a bogie exists or not
-	public void checkBogie(Train train) { 
-		System.out.print("Enter passenger bogie ID to check : ");
-		String bogie = sc.nextLine().trim();
-		boolean exist = train.containsBogie(bogie);
-		System.out.println("Contains Bogie? -> "+exist);
-	}
-	
-	// displaying final consist
-	public void displayConsist(Train train) {
-		System.out.println("Bogie Capacity : ");
-		for(Map.Entry<String, String> entry : train.getTrainConsist().entrySet()) {
-			System.out.println(entry.getKey() +" -> "+entry.getValue());
+	// method for displaying sorted List
+	public void displaySorted(Train train) {
+		System.out.println("\nAfter Sorting : ");
+		train.sortBogiesByCapacity();
+		for(Train.Bogie bogie : train.getBogies()) {
+			System.out.println(bogie);
 		}
-		System.out.println();
 	}
+	
+
 }

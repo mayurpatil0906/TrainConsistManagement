@@ -1,4 +1,5 @@
 
+
 package com.main;
 
 import com.controller.*;
@@ -22,16 +23,13 @@ public class Main {
 				mainController.addBogies(train); // adding bogies
 				break;
 			case 2:
-				mainController.removeBogies(train); // remove bogies
+				mainController.displayUnsorted(train); // unsorted bogies
 				break;
 			case 3:
-				mainController.displayConsist(train); // display mapping
+				mainController.displaySorted(train); // sorted bogies
 				break;
 			case 4:
-				mainController.checkBogie(train); // check if bogie exist
-				break;
-			case 5:
-				mainController.displayConsist(train); // display final consist
+				mainController.displaySorted(train); // display final consist
 				running = false;
 				break;
 			default:

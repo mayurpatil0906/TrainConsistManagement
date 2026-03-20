@@ -6,29 +6,45 @@ import java.util.*;
 
 public class Train {
 	
-	private Map<String,String> bogieCapacity; // map of bogies and their capacities 
+	// inner class Bogie 
+	public static class Bogie{
+		private String name;
+		private int capacity;
+		
+		public Bogie(String name, int capacity) {
+			this.name = name;
+			this.capacity = capacity;
+		}
+		
+		private String getName() {
+			return name;
+		}
+		
+		public int getCapacity() {
+			return capacity;
+		}
+		
+		//Override
+		public String toString() {
+			return name+" -> "+capacity;
+		}
+	}
+	
+	private List<Bogie> bogies; // List of bogies and their capacities 
 	
 	public Train() {
-		this.bogieCapacity = new HashMap<>(); // initializing the list
+		this.bogies = new ArrayList<>(); // initializing the list
 	}
 	
-	public int getBogieCount() {
-		return bogieCapacity.size();   //get number of bogies
+	public void addBogie(String name, int capacity) {
+		bogies.add(new Bogie(name,capacity)); 
 	}
 	
-	public Map<String,String> getTrainConsist(){
-		return bogieCapacity;   // get list of bogies 
+	public List<Bogie> getBogies(){
+		return bogies;
 	}
 	
-	public void mapBogieCapacity(String bogie, String capacity) {   //adding bogie
-		bogieCapacity.put(bogie.trim(),capacity);
-	}
-	
-	public void removeBogieCapacity(String bogie) {   //removing bogie
-		bogieCapacity.remove(bogie.trim());
-	}
-	
-	public boolean containsBogie(String bogie) {
-		return bogieCapacity.containsKey(bogie);
+	public void sortBogiesByCapacity() {
+		bogies.sort(Comparator.comparingInt(Bogie::getCapacity));
 	}
 }
