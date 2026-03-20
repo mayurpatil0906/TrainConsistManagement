@@ -6,17 +6,17 @@ import java.util.*;
 
 public class Train {
 	
-	private Set<String> passengerBogies; // set of bogies for avoiding duplicates
+	private LinkedHashSet<String> passengerBogies; // set of bogies for avoiding duplicates
 	
 	public Train() {
-		this.passengerBogies = new HashSet<>(); // initializing the list
+		this.passengerBogies = new LinkedHashSet<>(); // initializing the list
 	}
 	
 	public int getBogieCount() {
 		return passengerBogies.size();   //get number of bogies
 	}
 	
-	public Set<String> getTrainConsist(){
+	public LinkedHashSet<String> getTrainConsist(){
 		return passengerBogies;   // get list of bogies
 	}
 	
@@ -31,4 +31,56 @@ public class Train {
 	public boolean containsBogie(String bogie) {   // checking if bogie exists
 		return passengerBogies.contains(bogie); 
 	}
+	
+	public void addFirst(String bogie) { //adding bogie at first after deleting the bogie for maintaining uniqueness
+		List<String> tempList = new ArrayList<>(passengerBogies);
+		tempList.remove(bogie);
+		tempList.add(0, bogie);
+		passengerBogies.clear();
+		passengerBogies.addAll(tempList);
+	}
+	
+	// adding bogie at last
+	public void addLast(String bogie) {
+		passengerBogies.remove(bogie);
+		passengerBogies.add(bogie.trim());
+	}
+	
+	
+	// adding bogie in between
+	public void addAtIndex(int index, String bogie) {
+		List<String> temp = new ArrayList<>(passengerBogies);
+		temp.remove(bogie);
+		if(index >=0 && index <=temp.size()) {
+			temp.add(index,bogie.trim());
+		}
+		else {
+			temp.add(bogie.trim());
+		}
+		
+		passengerBogies.clear();
+		passengerBogies.addAll(temp);
+	}
+	
+	//removing first bogie
+	public void removeFirst() {
+		if(!passengerBogies.isEmpty()) {
+			Iterator<String> iterator = passengerBogies.iterator(); 
+			iterator.next();
+			iterator.remove();
+			
+		}
+	}
+	
+	// removing last bogie
+	public void removeLast() {
+		if(!passengerBogies.isEmpty()) {
+			List<String> temp = new ArrayList<>(passengerBogies);
+			temp.remove(temp.size()-1);
+			passengerBogies.clear();
+			passengerBogies.addAll(temp);
+		}
+	}
+	
+	
 }

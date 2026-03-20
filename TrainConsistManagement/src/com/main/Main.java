@@ -23,13 +23,28 @@ public class Main {
 				mainController.addBogies(train); // adding bogies
 				break;
 			case 2:
-				mainController.removeBogies(train); //removing bogies
+				mainController.addBogieAtFirst(train); // adding bogies at first
 				break;
 			case 3:
-				mainController.checkBogie(train); //checking if a bogie exist in the train consist
+				mainController.addBogieAtLast(train); //adding bogies at last
 				break;
 			case 4:
-				mainController.displayConsist(train); // printing final consist
+				mainController.addBogieAtIndex(train); // adding bogies at any position
+				break;
+			case 5:
+				mainController.removeBogies(train); // remove bogies
+				break;
+			case 6:
+				mainController.removeBogieFromFirst(train); // remove from first
+				break;
+			case 7:
+				mainController.removeBogieFromLast(train); // remove from last
+				break;
+			case 8:
+				mainController.checkBogie(train); // check if bogie exist
+				break;
+			case 9:
+				mainController.displayConsist(train); // display final consist
 				running = false;
 				break;
 			default:
