@@ -1,5 +1,6 @@
 package com.controller;
-import java.util.Scanner;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import com.trainconsist.*;
 
@@ -10,49 +11,41 @@ public class MainController {
     
     public void displayHeader() {
         System.out.println("==================================================");
-        System.out.println(" UC12 - Safety Compliance Check for Goods Bogies ");
+        System.out.println(" UC13 - Performance Comparison ");
         System.out.println("==================================================\n");
     }
-
-    public int showMenuAndGetChoice() {
-        System.out.println("1. Add Goods Bogie");
-        System.out.println("2. View Goods Bogies");
-        System.out.println("3. Check Safety Compliance");
-        System.out.println("4. Logout");
-        System.out.print("Enter your choice: ");
-
-        
-        int choice = sc.nextInt();
-        sc.nextLine();
-        return choice;
-    }
-
-    public void addGoodsBogie(Train train) {
-        System.out.print("Enter bogie type (Cylindrical,Open,Box) : ");
-        String type = sc.nextLine();
-
-        System.out.print("Enter cargo (Petroleum,Coal,Grain) : ");
-        String cargo = sc.nextLine();
-
-        train.addGoodsBogie(type, cargo);
-        System.out.println("Added Goods Bogie: " + type + " -> " + cargo);
-    }
-
-    public void displayGoodsBogies(Train train) {
-        System.out.println("\nGoods Bogies in Train :");
-        for (Train.GoodsBogie bogie : train.getGoodsBogie()) {
-            System.out.println(bogie);
-        }
-    }
-
-    public void checkSafety(Train train) {
-        boolean isSafe = train.isSafetyCompliant();
-        System.out.println("\nSafety Compliance Status : " + isSafe);
-        if (isSafe) {
-            System.out.println("Train formation is SAFE");
-        } else {
-            System.out.println("Train formation is NOT SAFE");
-        }
+    
+    public void runBenchMark(Train train) {  // performance comparison between loop and streams
+    	// creating large test dataset
+    	for(int i = 0 ; i < 1000000 ; i ++) {
+    		train.addBogie("Passenger", (i%100)+10);
+    	}
+    	
+    	List<Train.Bogie> bogies = train.getBogie();
+    	
+    	// 1. Loop based processing
+    	long startLoop = System.nanoTime();
+    	List<Train.Bogie> loopFiltered = new ArrayList<>();
+    	for(Train.Bogie bogie : bogies) {
+    		if(bogie.getCapacity() > 50) {
+    			loopFiltered.add(bogie);
+    		}
+    	}
+    	
+    	long endLoop = System.nanoTime();
+    	long loopExectuionTime = endLoop - startLoop;
+    	
+    	// 2. Stream based processing
+    	
+    	long startStream = System.nanoTime();
+    	List<Train.Bogie> streamFiltered = bogies.stream().filter(b -> b.getCapacity() > 50).collect(Collectors.toList());
+    	long endStream = System.nanoTime();
+    	long streamExecutionTime = endStream - startStream;
+    	
+    	//Display Execution time
+    	
+    	System.out.println("Loop execution time(ns) : "+loopExectuionTime);
+    	System.out.println("Stream execution time(ns) : "+streamExecutionTime);
     }
 
 }

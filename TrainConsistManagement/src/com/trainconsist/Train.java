@@ -8,46 +8,40 @@ import java.util.stream.*;
 public class Train {
 
 	// Inner class GoodsBogie
-	public static class GoodsBogie{
+	public static class Bogie{
 		private String type;
-		private String cargo;
+		private int capacity;
 		
-		public GoodsBogie(String type, String cargo) {
+		public Bogie(String type, int capacity) {
 			this.type = type;
-			this.cargo = cargo;
+			this.capacity = capacity;
 		}
 		
 		public String getType() {
 			return type;
-		}
+		} 
 		
-		public String getCargo() {
-			return cargo;
+		public int getCapacity() {
+			return capacity;
 		}
 		
 		public String toString() {
-			return type+" -> "+cargo;
+			return type+" -> "+capacity;
 		}
 	}
 	
-	private List<GoodsBogie> goodsBogie;
+	private List<Bogie> bogies; // list of object of Bogies
 	
 	public Train() {
-		this.goodsBogie = new ArrayList<>();
+		this.bogies = new ArrayList<>();
 	}
 	
-	public void addGoodsBogie(String type, String cargo) {
-		goodsBogie.add(new GoodsBogie(type,cargo));
+	public void addBogie(String type, int capacity) { // add objects to the list
+		bogies.add(new Bogie(type,capacity)); 
 	}
 	
-	public List<GoodsBogie> getGoodsBogie(){
-		return goodsBogie;
+	public List<Bogie> getBogie(){ 
+		return bogies;
 	}
-	
-	// in boolean algebra if A then B can be written as Not A or B
-	// it is checking: either type is not cylindrical and if it is cylindrical, it is not carrying petroleum
-	public boolean isSafetyCompliant() {
-		return goodsBogie.stream().allMatch(b-> !b.getType().equalsIgnoreCase("Cylindrical") || b.getCargo().equalsIgnoreCase("Petroleum")); 
-	}
-	
+
 }
