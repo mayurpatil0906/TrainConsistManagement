@@ -2,7 +2,7 @@ package com.controller;
 import java.util.*;
 
 import com.trainconsist.*;
-import java.util.Scanner;
+import com.trainconsist.Train.Bogie;
 
 
 // Main controller for the application
@@ -21,8 +21,8 @@ public class MainController {
 	public int showMenuGetChoice() {
 		
 		System.out.println("1. Add Bogies");
-		System.out.println("2. View bogies before sorting");
-		System.out.println("3. View bogies after sorting on the basis of capacity");
+		System.out.println("2. View all bogies");
+		System.out.println("3. View bogies after filtering");
 		System.out.println("4. Logout");
 		System.out.print("\nEnter your choice : ");
 		
@@ -55,13 +55,11 @@ public class MainController {
 		}
 	}
 	
-	// method for displaying sorted List
-	public void displaySorted(Train train) {
-		System.out.println("\nAfter Sorting : ");
-		train.sortBogiesByCapacity();
-		for(Train.Bogie bogie : train.getBogies()) {
-			System.out.println(bogie);
-		}
+	// method for displaying sorted List 
+	public void displayFiltered(Train train) {
+		System.out.println("\nAfter filtering : ");
+		List<Train.Bogie> filteredList=  train.filterBogiesByCapacity();
+		filteredList.forEach(System.out::println);
 	}
 	
 

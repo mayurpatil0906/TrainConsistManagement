@@ -1,6 +1,7 @@
 package com.trainconsist;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 //Train class for storing list of bogies attached to the train
 
@@ -44,7 +45,7 @@ public class Train {
 		return bogies;
 	}
 	
-	public void sortBogiesByCapacity() {
-		bogies.sort(Comparator.comparingInt(Bogie::getCapacity));
+	public List<Bogie> filterBogiesByCapacity() { 
+		return bogies.stream().filter(b -> b.capacity > 60).collect(Collectors.toList());   
 	}
 }

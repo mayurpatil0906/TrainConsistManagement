@@ -1,5 +1,4 @@
 
-
 package com.main;
 
 import com.controller.*;
@@ -20,16 +19,16 @@ public class Main {
 			
 			switch(choice) {
 			case 1:
-				mainController.addBogies(train); // adding bogies
+				mainController.addBogies(train); // adding bogies 
 				break;
 			case 2:
 				mainController.displayUnsorted(train); // unsorted bogies
 				break;
 			case 3:
-				mainController.displaySorted(train); // sorted bogies
+				mainController.displayFiltered(train); // sorted bogies
 				break;
 			case 4:
-				mainController.displaySorted(train); // display final consist
+					// display final consist
 				running = false;
 				break;
 			default:
