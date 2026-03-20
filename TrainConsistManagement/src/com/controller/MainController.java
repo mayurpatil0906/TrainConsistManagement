@@ -1,9 +1,9 @@
 package com.controller;
 import java.util.*;
-import java.util.stream.Collectors;
 
 import com.trainconsist.*;
 
+// main controller class
 public class MainController {
 	
     Scanner sc = new Scanner(System.in);
@@ -16,10 +16,10 @@ public class MainController {
     
     // taking user input 
     public int showMenuAndGetChoice() { 
-        System.out.println("1. Assign bogies");
+        System.out.println("\n1. Add bogies");
         System.out.println("2. View Bogies");
-        System.out.println("3. View Sorted Bogies (wrt capacity)");
-        System.out.println("4. Logout");
+        System.out.println("3. Sort bogie by Bogie ID");
+        System.out.println("5. Logout");
         System.out.print("Enter your choice: ");
 
         int choice = sc.nextInt();
@@ -37,17 +37,21 @@ public class MainController {
     	
     	train.addBogie(type, capacity);
     	System.out.println(type+" -> "+capacity+" added");
-    	
     }
-    // sortig bogies on the basis of their capacity
-     public void performBubbleSort(Train train) { 
-    	 if(train.getBogie().isEmpty()) {
-    		 System.out.println("No bogie to sort");
-    	 }
-    	 train.bubbleSortByCapacity();
-    	 System.out.println("\nAfter sorting\n");
-    	 displayBogies(train);
-     }
+    
+    // linear array based searching
+    public void searchBogieById(Train train) throws BogieNotFoundException {
+    	System.out.print("Enter the Bogie Id to search : ");
+    	String bogieId = sc.nextLine();
+    	try {
+        	Train.Bogie foundBogie = train.searchById(bogieId);
+        	System.out.println("Found bogie "+foundBogie.getType()+" with capacity "+foundBogie.getCapacity());
+        	
+    	}
+    	catch (BogieNotFoundException e) {
+        	System.out.println("\nError : "+e.getMessage());
+    	}
+    }
 
     // displaying all bogies
     public void displayBogies(Train train) {
@@ -56,5 +60,6 @@ public class MainController {
             System.out.println(bogie.getType()+" -> "+bogie.getCapacity());
         }
     }
+    
 
 }
