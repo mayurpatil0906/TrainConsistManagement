@@ -12,7 +12,11 @@ public class Train {
 		private String type;
 		private int capacity;
 		
-		public Bogie(String type, int capacity) {
+		public Bogie(String type, int capacity) throws InvalidCapacityException{
+			
+			if(capacity<=0) {
+				throw new InvalidCapacityException("Capacity must be greater than 0");
+			}
 			this.type = type;
 			this.capacity = capacity;
 		}
@@ -36,11 +40,11 @@ public class Train {
 		this.bogies = new ArrayList<>();
 	}
 	
-	public void addBogie(String type, int capacity) { // add objects to the list
+	public void addBogie(String type, int capacity) throws InvalidCapacityException{ // add objects to the list
 		bogies.add(new Bogie(type,capacity)); 
 	}
 	
-	public List<Bogie> getBogie(){ 
+	public List<Bogie> getBogie(){  
 		return bogies;
 	}
 

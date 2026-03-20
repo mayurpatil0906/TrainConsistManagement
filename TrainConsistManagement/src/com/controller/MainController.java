@@ -11,41 +11,54 @@ public class MainController {
     
     public void displayHeader() {
         System.out.println("==================================================");
-        System.out.println(" UC13 - Performance Comparison ");
+        System.out.println("         ==Train Consist Management App==           ");
         System.out.println("==================================================\n");
     }
     
-    public void runBenchMark(Train train) {  // performance comparison between loop and streams
-    	// creating large test dataset
-    	for(int i = 0 ; i < 1000000 ; i ++) {
-    		train.addBogie("Passenger", (i%100)+10);
-    	}
-    	
-    	List<Train.Bogie> bogies = train.getBogie();
-    	
-    	// 1. Loop based processing
-    	long startLoop = System.nanoTime();
-    	List<Train.Bogie> loopFiltered = new ArrayList<>();
-    	for(Train.Bogie bogie : bogies) {
-    		if(bogie.getCapacity() > 50) {
-    			loopFiltered.add(bogie);
-    		}
-    	}
-    	
-    	long endLoop = System.nanoTime();
-    	long loopExectuionTime = endLoop - startLoop;
-    	
-    	// 2. Stream based processing
-    	
-    	long startStream = System.nanoTime();
-    	List<Train.Bogie> streamFiltered = bogies.stream().filter(b -> b.getCapacity() > 50).collect(Collectors.toList());
-    	long endStream = System.nanoTime();
-    	long streamExecutionTime = endStream - startStream;
-    	
-    	//Display Execution time
-    	
-    	System.out.println("Loop execution time(ns) : "+loopExectuionTime);
-    	System.out.println("Stream execution time(ns) : "+streamExecutionTime);
+    // taking user input 
+    public int showMenuAndGetChoice() {
+        System.out.println("1. Add passenger Bogie");
+        System.out.println("2. View passenger Bogies");
+        System.out.println("3. Logout");
+        System.out.print("Enter your choice: ");
+
+        int choice = sc.nextInt();
+        sc.nextLine();
+        return choice;
+    }
+    
+    // adding passenger bogie
+    public void addPassengerBogie(Train train) {
+        System.out.print("Enter bogie ID : ");
+        String trainId = sc.nextLine();
+
+        System.out.print("Enter capacity : ");
+        String cap = sc.nextLine();
+
+        // catching errors
+        try {
+        	int capacity =Integer.parseInt(cap);
+        	train.addBogie(trainId, capacity);
+            System.out.println("Added Passenger Bogie: " + trainId + " -> " + capacity);
+        }
+        // if capacity in non integer
+        catch (NumberFormatException e) {
+        	System.out.println("Error : Capacity should be an integer");
+        }
+        // if capacity is <=0
+        catch (InvalidCapacityException e) {
+        	System.out.println("\nError : "+e.getMessage());
+        	
+        }
+        
+    }
+
+    // displaying all bogies
+    public void displayPassengerBogies(Train train) {
+        System.out.println("\nPassenger Bogies in Train :"); 
+        for (Train.Bogie bogie : train.getBogie()) {
+            System.out.println(bogie);
+        }
     }
 
 }

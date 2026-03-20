@@ -1,4 +1,5 @@
 
+
 package com.main;
 
 import com.controller.*;
@@ -12,7 +13,29 @@ public class Main {
 		MainController mainController = new MainController();
 
 		mainController.displayHeader(); //displaying header
-		mainController.runBenchMark(train); // Performance Comparison
+
+		boolean running = true;
 		
+		while(running) {
+			int choice = mainController.showMenuAndGetChoice();
+			switch(choice) {
+			
+			case 1:
+				mainController.addPassengerBogie(train);
+				break;
+			
+			case 2:
+				mainController.displayPassengerBogies(train);
+				break;
+			
+			case 3:
+				running = false;
+				mainController.displayPassengerBogies(train);
+				break;
+				
+			default:
+				System.out.println("Invalud choice");
+			}
+		}
 	}
 }
