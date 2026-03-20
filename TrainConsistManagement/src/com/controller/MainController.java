@@ -22,7 +22,7 @@ public class MainController {
 		
 		System.out.println("1. Add Bogies");
 		System.out.println("2. View all bogies");
-		System.out.println("3. View bogies after filtering");
+		System.out.println("3. Group bogies by type");
 		System.out.println("4. Logout");
 		System.out.print("\nEnter your choice : ");
 		
@@ -47,19 +47,24 @@ public class MainController {
 		
 	}
 	
-	// method for displaying unsorted List
-	public void displayUnsorted(Train train) {
-		System.out.println("Before Sorting : ");
+	// method for displaying all bogies
+	public void displayAll(Train train) {
+		System.out.println("Bogies :  ");
 		for(Train.Bogie bogie : train.getBogies()) {
 			System.out.println(bogie);
 		}
 	}
 	
-	// method for displaying sorted List 
-	public void displayFiltered(Train train) {
-		System.out.println("\nAfter filtering : ");
-		List<Train.Bogie> filteredList=  train.filterBogiesByCapacity();
-		filteredList.forEach(System.out::println);
+	// method for displaying grouped bogies 
+	public void displayGrouped(Train train) {
+		System.out.println("\nAfter Grouping : ");
+		Map<String , List<Bogie>> groupedBogies=  train.groupBogiesByType();
+		for(Map.Entry<String,List<Bogie>> entry : groupedBogies.entrySet()) {
+			System.out.println("\nBogie type : "+entry.getKey());
+			for(Train.Bogie bogie : entry.getValue()) {
+				System.out.println("Capacity -> "+bogie.getCapacity());
+			}
+		}
 	}
 	
 

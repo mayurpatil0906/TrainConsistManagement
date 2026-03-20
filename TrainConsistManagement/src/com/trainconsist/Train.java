@@ -45,7 +45,7 @@ public class Train {
 		return bogies;
 	}
 	
-	public List<Bogie> filterBogiesByCapacity() { 
-		return bogies.stream().filter(b -> b.capacity > 60).collect(Collectors.toList());   
+	public Map<String,List<Bogie>> groupBogiesByType() {  
+		return bogies.stream().collect(Collectors.groupingBy(b -> b.getName()));    // grouping by names
 	}
 }
