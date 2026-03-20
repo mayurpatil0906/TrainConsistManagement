@@ -1,51 +1,28 @@
 package com.trainconsist;
 
 import java.util.*;
+import java.util.regex.*;
 import java.util.stream.Collectors;
 
 //Train class for storing list of bogies attached to the train
 
 public class Train {
-	
-	// inner class Bogie 
-	public static class Bogie{
-		private String name;
-		private int capacity;
-		
-		public Bogie(String name, int capacity) {
-			this.name = name;
-			this.capacity = capacity;
-		}
-		
-		private String getName() {
-			return name;
-		}
-		
-		public int getCapacity() {
-			return capacity;
-		}
-		
-		//Override
-		public String toString() {
-			return name+" -> "+capacity;
-		}
+
+	private static final String TRAIN_ID_PATTERN = "TRN-\\d{4}";
+	private static final String CARGO_CODE_PATTERN = "PET-[A-Z]{2}";
+
+	// validating Train Id format (TRN-XXXX) : X -> Integer
+	public boolean validateTrainId(String trainId) {
+		Pattern pattern = Pattern.compile(TRAIN_ID_PATTERN);
+		Matcher matcher = pattern.matcher(trainId); 
+		return matcher.matches();
 	}
-	
-	private List<Bogie> bogies; // List of bogies and their capacities 
-	
-	public Train() {
-		this.bogies = new ArrayList<>(); // initializing the list
+
+	// validating Cargo Code format (PET-AA) : X -> Alphabet UpperCase
+	public boolean validateCargoCode(String cargoCode) {
+		Pattern pattern = Pattern.compile(CARGO_CODE_PATTERN);
+		Matcher matcher = pattern.matcher(cargoCode); 
+		return matcher.matches();
 	}
-	
-	public void addBogie(String name, int capacity) {
-		bogies.add(new Bogie(name,capacity)); 
-	}
-	
-	public List<Bogie> getBogies(){
-		return bogies;
-	}
-	
-	public int getTotalCapacity() {   
-		return bogies.stream().map(bogie->bogie.capacity).reduce(0,Integer::sum);     // adding capacities
-	}
+
 }
